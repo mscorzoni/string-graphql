@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/marcos/strings-graphql/dev
-# timestamp: Tue Jan 08 2019 21:29:03 GMT+0000 (Greenwich Mean Time)
+# timestamp: Thu Jan 10 2019 11:17:55 GMT+0000 (Greenwich Mean Time)
 
 type AggregateUser {
   count: Int!
@@ -70,8 +70,9 @@ type Subscription {
 
 type User implements Node {
   id: ID!
-  name: String!
+  name: String
   email: String!
+  password: String!
 }
 
 """A connection to a list of items."""
@@ -85,8 +86,9 @@ type UserConnection {
 }
 
 input UserCreateInput {
-  name: String!
+  name: String
   email: String!
+  password: String!
 }
 
 """An edge in a connection."""
@@ -105,6 +107,8 @@ enum UserOrderByInput {
   name_DESC
   email_ASC
   email_DESC
+  password_ASC
+  password_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -113,8 +117,9 @@ enum UserOrderByInput {
 
 type UserPreviousValues {
   id: ID!
-  name: String!
+  name: String
   email: String!
+  password: String!
 }
 
 type UserSubscriptionPayload {
@@ -159,11 +164,13 @@ input UserSubscriptionWhereInput {
 input UserUpdateInput {
   name: String
   email: String
+  password: String
 }
 
 input UserUpdateManyMutationInput {
   name: String
   email: String
+  password: String
 }
 
 input UserWhereInput {
@@ -295,6 +302,46 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   email_not_ends_with: String
+  password: String
+
+  """All values that are not equal to given value."""
+  password_not: String
+
+  """All values that are contained in given list."""
+  password_in: [String!]
+
+  """All values that are not contained in given list."""
+  password_not_in: [String!]
+
+  """All values less than the given value."""
+  password_lt: String
+
+  """All values less than or equal the given value."""
+  password_lte: String
+
+  """All values greater than the given value."""
+  password_gt: String
+
+  """All values greater than or equal the given value."""
+  password_gte: String
+
+  """All values containing the given string."""
+  password_contains: String
+
+  """All values not containing the given string."""
+  password_not_contains: String
+
+  """All values starting with the given string."""
+  password_starts_with: String
+
+  """All values not starting with the given string."""
+  password_not_starts_with: String
+
+  """All values ending with the given string."""
+  password_ends_with: String
+
+  """All values not ending with the given string."""
+  password_not_ends_with: String
 }
 
 input UserWhereUniqueInput {
