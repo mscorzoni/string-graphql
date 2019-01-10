@@ -12,7 +12,7 @@ const MyButton = props => {
                          href={props.linkTo}
                          {...props.addStyles}
         >
-          {props.title}
+          <a>{props.title}</a>
         </Link>
         break;
     

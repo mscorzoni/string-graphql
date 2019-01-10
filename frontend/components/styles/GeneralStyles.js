@@ -485,7 +485,7 @@ footer .business_nfo .nfo {
     display: flex;
 }
 
-.card_item_wrapper.grid_bars .image {
+.card_item_wrapper .grid_bars .image {
     width: 420px;
     height: 211px;
     border: none;

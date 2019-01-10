@@ -1,7 +1,10 @@
+import HomePromotion from '../components/Home/HomePromotion';
+
 const Home = props => (
   <div>
-    Home
+    <HomePromotion />
   </div>
+
 )
 
 export default Home;
