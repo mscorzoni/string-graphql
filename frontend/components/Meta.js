@@ -7,7 +7,7 @@ const Meta = () => (
     {/* <link rel="shortcut icon" href="/static/favicon.png" /> */}
     <link href="https://fonts.googleapis.com/css?family=Monoton|Oswald:300,400,500" rel="stylesheet"></link>
     <link rel="stylesheet" type="text/css" href="/static/nprogress.css" />
-    <link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
+   
     <title>Strings</title>
   </Head>
 );
