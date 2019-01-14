@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import MyButton from './button';
+import FormatMoney from '../../lib/formatMoney';
 
 class Card extends Component {
 
   renderCardImage(images){
-    if(images.length > 0){
+    if(images && images.length > 0){
       return images[0].url
     } else {
-      return '/static/image_not_available.png'
+      return '/static/image_not_availble.png'
     }
   }
 
@@ -26,7 +27,7 @@ class Card extends Component {
           <div className="tags">
             <div className="brand">{props.brand.name}</div>
             <div className="name">{props.name}</div>
-            <div className="name">{props.price}</div>
+            <div className="name">{FormatMoney(props.price)}</div>
           </div>
 
           { props.grid && (
@@ -47,11 +48,7 @@ class Card extends Component {
                 }}
               />
             </div>
-            <div className="button_wrapp">
-              <MyButton 
-                    type="bag_link"
-              />
-            </div>
+
           </div>
 
         </div>

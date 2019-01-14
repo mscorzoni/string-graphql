@@ -19,7 +19,7 @@ const CardBlock = props => {
       <div className="container">
         {
           props.title && (
-            <div className="titlw">
+            <div className="title">
               props.title
             </div>
           )

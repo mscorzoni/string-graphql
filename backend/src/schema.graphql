@@ -8,5 +8,5 @@ type Mutation {
 }
 
 type Query {
-  products(where: ProductWhereInput, order: ProductOrderByInput): [Product]!
+  products(where: ProductWhereInput, orderBy: ProductOrderByInput): [Product]!
 }
