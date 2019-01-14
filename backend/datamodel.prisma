@@ -4,3 +4,28 @@ type User {
   email: String!
   password: String!
 }
+
+type Brand {
+  id: ID! @unique
+  name: String!
+}
+
+type Wood {
+  id: ID! @unique
+  name: String!
+}
+
+type Product {
+  id: ID! @unique
+  name: String!
+  description: String
+  price: Int
+  brand: Brand!
+  shipping: Boolean
+  available: Boolean
+  wood: Wood!
+  frets: Int
+  publish: Boolean
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}

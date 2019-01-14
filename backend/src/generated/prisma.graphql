@@ -1,7 +1,19 @@
 # source: https://eu1.prisma.sh/marcos/strings-graphql/dev
-# timestamp: Thu Jan 10 2019 11:17:55 GMT+0000 (Greenwich Mean Time)
+# timestamp: Mon Jan 14 2019 14:11:46 GMT+0000 (Greenwich Mean Time)
+
+type AggregateBrand {
+  count: Int!
+}
+
+type AggregateProduct {
+  count: Int!
+}
 
 type AggregateUser {
+  count: Int!
+}
+
+type AggregateWood {
   count: Int!
 }
 
@@ -9,6 +21,215 @@ type BatchPayload {
   """The number of nodes that have been affected by the Batch operation."""
   count: Long!
 }
+
+type Brand implements Node {
+  id: ID!
+  name: String!
+}
+
+"""A connection to a list of items."""
+type BrandConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [BrandEdge]!
+  aggregate: AggregateBrand!
+}
+
+input BrandCreateInput {
+  name: String!
+}
+
+input BrandCreateOneInput {
+  create: BrandCreateInput
+  connect: BrandWhereUniqueInput
+}
+
+"""An edge in a connection."""
+type BrandEdge {
+  """The item at the end of the edge."""
+  node: Brand!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum BrandOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type BrandPreviousValues {
+  id: ID!
+  name: String!
+}
+
+type BrandSubscriptionPayload {
+  mutation: MutationType!
+  node: Brand
+  updatedFields: [String!]
+  previousValues: BrandPreviousValues
+}
+
+input BrandSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [BrandSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [BrandSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [BrandSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: BrandWhereInput
+}
+
+input BrandUpdateDataInput {
+  name: String
+}
+
+input BrandUpdateInput {
+  name: String
+}
+
+input BrandUpdateManyMutationInput {
+  name: String
+}
+
+input BrandUpdateOneRequiredInput {
+  create: BrandCreateInput
+  connect: BrandWhereUniqueInput
+  update: BrandUpdateDataInput
+  upsert: BrandUpsertNestedInput
+}
+
+input BrandUpsertNestedInput {
+  update: BrandUpdateDataInput!
+  create: BrandCreateInput!
+}
+
+input BrandWhereInput {
+  """Logical AND on all given filters."""
+  AND: [BrandWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [BrandWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [BrandWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+}
+
+input BrandWhereUniqueInput {
+  id: ID
+}
+
+scalar DateTime
 
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
@@ -18,11 +239,29 @@ scalar Long
 
 type Mutation {
   createUser(data: UserCreateInput!): User!
+  createProduct(data: ProductCreateInput!): Product!
+  createWood(data: WoodCreateInput!): Wood!
+  createBrand(data: BrandCreateInput!): Brand!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateProduct(data: ProductUpdateInput!, where: ProductWhereUniqueInput!): Product
+  updateWood(data: WoodUpdateInput!, where: WoodWhereUniqueInput!): Wood
+  updateBrand(data: BrandUpdateInput!, where: BrandWhereUniqueInput!): Brand
   deleteUser(where: UserWhereUniqueInput!): User
+  deleteProduct(where: ProductWhereUniqueInput!): Product
+  deleteWood(where: WoodWhereUniqueInput!): Wood
+  deleteBrand(where: BrandWhereUniqueInput!): Brand
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertProduct(where: ProductWhereUniqueInput!, create: ProductCreateInput!, update: ProductUpdateInput!): Product!
+  upsertWood(where: WoodWhereUniqueInput!, create: WoodCreateInput!, update: WoodUpdateInput!): Wood!
+  upsertBrand(where: BrandWhereUniqueInput!, create: BrandCreateInput!, update: BrandUpdateInput!): Brand!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyProducts(data: ProductUpdateManyMutationInput!, where: ProductWhereInput): BatchPayload!
+  updateManyWoods(data: WoodUpdateManyMutationInput!, where: WoodWhereInput): BatchPayload!
+  updateManyBrands(data: BrandUpdateManyMutationInput!, where: BrandWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyProducts(where: ProductWhereInput): BatchPayload!
+  deleteManyWoods(where: WoodWhereInput): BatchPayload!
+  deleteManyBrands(where: BrandWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -52,10 +291,399 @@ type PageInfo {
   endCursor: String
 }
 
+type Product implements Node {
+  id: ID!
+  name: String!
+  description: String
+  price: Int
+  brand: Brand!
+  shipping: Boolean
+  available: Boolean
+  wood: Wood!
+  frets: Int
+  publish: Boolean
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type ProductConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ProductEdge]!
+  aggregate: AggregateProduct!
+}
+
+input ProductCreateInput {
+  name: String!
+  description: String
+  price: Int
+  shipping: Boolean
+  available: Boolean
+  frets: Int
+  publish: Boolean
+  brand: BrandCreateOneInput!
+  wood: WoodCreateOneInput!
+}
+
+"""An edge in a connection."""
+type ProductEdge {
+  """The item at the end of the edge."""
+  node: Product!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ProductOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  description_ASC
+  description_DESC
+  price_ASC
+  price_DESC
+  shipping_ASC
+  shipping_DESC
+  available_ASC
+  available_DESC
+  frets_ASC
+  frets_DESC
+  publish_ASC
+  publish_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type ProductPreviousValues {
+  id: ID!
+  name: String!
+  description: String
+  price: Int
+  shipping: Boolean
+  available: Boolean
+  frets: Int
+  publish: Boolean
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ProductSubscriptionPayload {
+  mutation: MutationType!
+  node: Product
+  updatedFields: [String!]
+  previousValues: ProductPreviousValues
+}
+
+input ProductSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ProductSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ProductSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ProductSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ProductWhereInput
+}
+
+input ProductUpdateInput {
+  name: String
+  description: String
+  price: Int
+  shipping: Boolean
+  available: Boolean
+  frets: Int
+  publish: Boolean
+  brand: BrandUpdateOneRequiredInput
+  wood: WoodUpdateOneRequiredInput
+}
+
+input ProductUpdateManyMutationInput {
+  name: String
+  description: String
+  price: Int
+  shipping: Boolean
+  available: Boolean
+  frets: Int
+  publish: Boolean
+}
+
+input ProductWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ProductWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ProductWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ProductWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+  price: Int
+
+  """All values that are not equal to given value."""
+  price_not: Int
+
+  """All values that are contained in given list."""
+  price_in: [Int!]
+
+  """All values that are not contained in given list."""
+  price_not_in: [Int!]
+
+  """All values less than the given value."""
+  price_lt: Int
+
+  """All values less than or equal the given value."""
+  price_lte: Int
+
+  """All values greater than the given value."""
+  price_gt: Int
+
+  """All values greater than or equal the given value."""
+  price_gte: Int
+  shipping: Boolean
+
+  """All values that are not equal to given value."""
+  shipping_not: Boolean
+  available: Boolean
+
+  """All values that are not equal to given value."""
+  available_not: Boolean
+  frets: Int
+
+  """All values that are not equal to given value."""
+  frets_not: Int
+
+  """All values that are contained in given list."""
+  frets_in: [Int!]
+
+  """All values that are not contained in given list."""
+  frets_not_in: [Int!]
+
+  """All values less than the given value."""
+  frets_lt: Int
+
+  """All values less than or equal the given value."""
+  frets_lte: Int
+
+  """All values greater than the given value."""
+  frets_gt: Int
+
+  """All values greater than or equal the given value."""
+  frets_gte: Int
+  publish: Boolean
+
+  """All values that are not equal to given value."""
+  publish_not: Boolean
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  brand: BrandWhereInput
+  wood: WoodWhereInput
+}
+
+input ProductWhereUniqueInput {
+  id: ID
+}
+
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  products(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product]!
+  woods(where: WoodWhereInput, orderBy: WoodOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Wood]!
+  brands(where: BrandWhereInput, orderBy: BrandOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Brand]!
   user(where: UserWhereUniqueInput!): User
+  product(where: ProductWhereUniqueInput!): Product
+  wood(where: WoodWhereUniqueInput!): Wood
+  brand(where: BrandWhereUniqueInput!): Brand
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  productsConnection(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProductConnection!
+  woodsConnection(where: WoodWhereInput, orderBy: WoodOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): WoodConnection!
+  brandsConnection(where: BrandWhereInput, orderBy: BrandOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BrandConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -66,6 +694,9 @@ type Query {
 
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  product(where: ProductSubscriptionWhereInput): ProductSubscriptionPayload
+  wood(where: WoodSubscriptionWhereInput): WoodSubscriptionPayload
+  brand(where: BrandSubscriptionWhereInput): BrandSubscriptionPayload
 }
 
 type User implements Node {
@@ -345,5 +976,212 @@ input UserWhereInput {
 }
 
 input UserWhereUniqueInput {
+  id: ID
+}
+
+type Wood implements Node {
+  id: ID!
+  name: String!
+}
+
+"""A connection to a list of items."""
+type WoodConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [WoodEdge]!
+  aggregate: AggregateWood!
+}
+
+input WoodCreateInput {
+  name: String!
+}
+
+input WoodCreateOneInput {
+  create: WoodCreateInput
+  connect: WoodWhereUniqueInput
+}
+
+"""An edge in a connection."""
+type WoodEdge {
+  """The item at the end of the edge."""
+  node: Wood!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum WoodOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type WoodPreviousValues {
+  id: ID!
+  name: String!
+}
+
+type WoodSubscriptionPayload {
+  mutation: MutationType!
+  node: Wood
+  updatedFields: [String!]
+  previousValues: WoodPreviousValues
+}
+
+input WoodSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [WoodSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [WoodSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [WoodSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: WoodWhereInput
+}
+
+input WoodUpdateDataInput {
+  name: String
+}
+
+input WoodUpdateInput {
+  name: String
+}
+
+input WoodUpdateManyMutationInput {
+  name: String
+}
+
+input WoodUpdateOneRequiredInput {
+  create: WoodCreateInput
+  connect: WoodWhereUniqueInput
+  update: WoodUpdateDataInput
+  upsert: WoodUpsertNestedInput
+}
+
+input WoodUpsertNestedInput {
+  update: WoodUpdateDataInput!
+  create: WoodCreateInput!
+}
+
+input WoodWhereInput {
+  """Logical AND on all given filters."""
+  AND: [WoodWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [WoodWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [WoodWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+}
+
+input WoodWhereUniqueInput {
   id: ID
 }
