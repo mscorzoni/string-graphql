@@ -1,6 +1,7 @@
 import React from 'react';
 import CardBlockShop from './CardBlockShop';
 
+
 const LoadMoreCards = props => {
   return (
     <div>

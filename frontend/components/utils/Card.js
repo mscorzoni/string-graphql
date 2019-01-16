@@ -42,7 +42,7 @@ class Card extends Component {
                 type="default"
                 altClass="card_link"
                 title="View product"
-                // linkTo={ `/product_detail/${props}` }
+                linkTo="/"
                 style={{
                   margin: '10px 0 0 0'
                 }}

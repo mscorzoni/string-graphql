@@ -1,15 +1,25 @@
 import React from 'react';
 import Card from './Card';
+import Link from 'next/link';
 
 const CardBlock = props => {
 
   const renderCards = () => (
-    props.list && (
-      props.list.map((card, i) => (
-        <Card 
-          key={i}
-          {...card}
-        />
+    props && (
+      props.map((card, i) => (
+        <Link 
+          href={{
+            pathname: '/product',
+            query: { id: card.id }
+          }}
+        >
+          <a>
+            <Card 
+              key={i}
+              {...card}
+            />
+          </a>
+        </Link>
       ))
     )
   )
@@ -28,7 +38,7 @@ const CardBlock = props => {
           display: 'flex',
           flexWrap: 'wrap'
         }}>
-          { renderCards(props.list) }
+          { renderCards(props) }
         </div>
       </div>
     </div>

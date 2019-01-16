@@ -1,16 +1,26 @@
 import React from 'react';
 import Card from '../utils/Card';
+import Link from 'next/link';
 
 const CardBlockShop = props => {
 
   const renderCards = () => (
     props.list &&  (
       props.list.map(card => (
-        <Card 
+        <Link
           key={card.id}
-          { ...card }
-          grid={ props.grid }
-        />
+          href={{
+            pathname: '/product',
+            query: { id: card.id }
+          }}
+        >
+          <a>
+            <Card 
+              { ...card }
+              grid={ props.grid }
+            />
+          </a>
+        </Link>
       ))
     )
   )
