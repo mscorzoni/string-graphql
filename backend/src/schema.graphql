@@ -10,4 +10,5 @@ type Mutation {
 type Query {
   products(where: ProductWhereInput, orderBy: ProductOrderByInput): [Product]!
   product(where: ProductWhereUniqueInput!): Product
+  brands: [Brand]!
 }
